@@ -1,0 +1,28 @@
+{
+    "name": "juandiii/logger",
+    "description": "Logger Service Client API",
+    "type": "library",
+    "require": {
+        "illuminate/support": "5.7.*",
+        "guzzlehttp/guzzle": "^6.5.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juan Diego",
+            "email": "juandiegolopezve@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "JuanDiii\\LoggerService\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JuanDiii\\LoggerService\\Providers\\LoggerServiceProvider"
+            ]
+        }
+    }
+}
