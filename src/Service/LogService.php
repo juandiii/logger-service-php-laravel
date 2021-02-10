@@ -2,6 +2,7 @@
 
 namespace JuanDiii\LoggerService\Service;
 
+use Exception;
 use Illuminate\Support\Facades\App;
 
 class LogService
@@ -11,12 +12,11 @@ class LogService
      * @param String appName
      * @param String message
      */
-    public function debug($appName, $message)
+    public function debug($message)
     {
         $data = [
             'body' => [
-                'routingKey' => 'copyryn',
-                'message' => 'Error in line 56',
+                'message' => $message,
                 'error' =>  'debug',
             ]
         ];
@@ -28,11 +28,10 @@ class LogService
      * @param String appName
      * @param String message
      */
-    public function error($appName, $message)
+    public function error($message)
     {
         $data = [
             'body' => [
-                'routingKey' => $appName,
                 'message' => $message,
                 'error' =>  'error',
             ]
@@ -52,6 +51,11 @@ class LogService
          */
         $connect = App::make(GuzzleClient::class);
 
-        return $connect->post('/api/v1/loggers', $data);
+        try {
+            return $connect->post('/api/v1/loggers', $data);
+        } catch (Exception $ex) {
+        }
+
+        return;
     }
 }

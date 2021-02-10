@@ -3,6 +3,7 @@
 return [
     // token - Logger
     'logger' => [
-        'token' => '123'
+        'token' => '123',
+        'appKey' => '12334'
     ]
 ];

@@ -6,7 +6,4 @@ use \Exception;
 
 class LoggerServiceException extends Exception
 {
-    public function report()
-    {
-    }
 }

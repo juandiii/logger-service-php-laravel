@@ -5,17 +5,17 @@ namespace JuanDiii\LoggerService\Service;
 use Exception;
 use \GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\ServerException;
 use JuanDiii\LoggerService\Exception\LoggerServiceException;
 
 class GuzzleClient
 {
     const CONFIG_KEY = 'logger';
-    const BASE_URL = "http://logger-service:9999";
+    const BASE_URL = "http://localhost:8888";
     const CODE_RESPONSE = 200;
 
     private $token;
+    private $appKey;
     private $httpClient;
 
     public function __construct($config)
@@ -24,7 +24,8 @@ class GuzzleClient
         $this->httpClient = new Client([
             'base_uri' => GuzzleClient::BASE_URL,
             'headers' => [
-                'Authorization' => "Bearer {$this->token}"
+                'Authorization' => "Bearer {$this->token}",
+                'X-API-KEY' => $this->appKey,
             ],
         ]);
     }
@@ -60,8 +61,13 @@ class GuzzleClient
 
             $json = $body->getBody()->getContents();
             $json = json_decode($json, true);
+            $response = $json['data'];
 
-            return $json['data'];
+            if (($response['errorsEvents'] != 0 && count($response['errors']))) {
+                throw new LoggerServiceException("Internal error. Please contacting with the support.", 500);
+            }
+
+            return $response;
         } catch (ServerException $ex) {
             throw new LoggerServiceException($ex->getMessage());
         } catch (ClientException $ex) {
@@ -76,6 +82,7 @@ class GuzzleClient
         if ($config->has(self::CONFIG_KEY)) {
             $data = $config->get(self::CONFIG_KEY);
             $this->token = $data['logger']['token'];
+            $this->appKey = $data['logger']['appKey'];
         }
     }
 }
