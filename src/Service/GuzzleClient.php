@@ -64,7 +64,7 @@ class GuzzleClient
             $response = $json['data'];
 
             if (($response['errorsEvents'] != 0 && count($response['errors']))) {
-                throw new LoggerServiceException("Internal error. Please contacting with the support.", 500);
+                throw new LoggerServiceException("Internal error. Please contact the technical support.", 500);
             }
 
             return $response;
