@@ -5,8 +5,8 @@ namespace JuanDiii\LoggerService\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static function debug($appName, $message);
- * @method static function error($appName, $message);
+ * @method static function debug($message);
+ * @method static function error($message);
  *
  */
 class LogService extends Facade
