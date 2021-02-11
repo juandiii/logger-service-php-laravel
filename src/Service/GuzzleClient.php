@@ -14,8 +14,8 @@ class GuzzleClient
     const BASE_URL = "http://localhost:8888";
     const CODE_RESPONSE = 200;
 
-    private $token;
-    private $appKey;
+    private $accessKeyId;
+    private $accessSecretKey;
     private $httpClient;
 
     public function __construct($config)
@@ -24,8 +24,8 @@ class GuzzleClient
         $this->httpClient = new Client([
             'base_uri' => GuzzleClient::BASE_URL,
             'headers' => [
-                'Authorization' => "Bearer {$this->token}",
-                'X-API-KEY' => $this->appKey,
+                'ACCESS_KEY_ID' => $this->accessKeyId,
+                'ACCESS_SECRET_KEY' => $this->accessSecretKey,
             ],
         ]);
     }
@@ -81,8 +81,8 @@ class GuzzleClient
     {
         if ($config->has(self::CONFIG_KEY)) {
             $data = $config->get(self::CONFIG_KEY);
-            $this->token = $data['logger']['token'];
-            $this->appKey = $data['logger']['appKey'];
+            $this->accessKeyId = $data['logger']['accessKeyId'];
+            $this->accessSecretKey = $data['logger']['accessSecretKey'];
         }
     }
 }

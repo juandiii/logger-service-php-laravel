@@ -3,7 +3,7 @@
 return [
     // token - Logger
     'logger' => [
-        'token' => env('LOGGER_TOKEN'),
-        'appKey' => env('LOGGER_KEY')
+        'accessKeyId' => env('LOGGER_ACCESS_KEY_ID'),
+        'accessSecretKey' => env('LOGGER_ACCESS_SECRET_KEY')
     ]
 ];
