@@ -1,6 +1,5 @@
 {
     "name": "juandiii/logger",
-    "version": "5.8.x-dev",
     "description": "Logger Service Client API",
     "type": "library",
     "require": {
