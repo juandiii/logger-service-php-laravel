@@ -1,10 +1,9 @@
 {
     "name": "juandiii/logger",
-    "version": "5.8.x-dev",
     "description": "Logger Service Client API",
     "type": "library",
     "require": {
-        "illuminate/support": "5.8.*",
+        "illuminate/support": "6.*",
         "guzzlehttp/guzzle": "^6.5.5"
     },
     "license": "MIT",
